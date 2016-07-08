@@ -1,0 +1,23 @@
+{
+  "name": "coffeescript-intro",
+  "version": "1.0.0",
+  "description": "\"simple app to learn node and coffee\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CShekta/coffeescript-intro.git"
+  },
+  "author": "cshekta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CShekta/coffeescript-intro/issues"
+  },
+  "homepage": "https://github.com/CShekta/coffeescript-intro#readme",
+  "dependencies": {
+    "formidable": "^1.0.17"
+  }
+}

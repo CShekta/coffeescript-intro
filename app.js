@@ -8,7 +8,9 @@
 
   app = express();
 
-  all_names = ['world'];
+  all_names = {
+    'world': 1
+  };
 
   app.engine('handlebars', exphbs({
     defaultLayout: 'main'
@@ -22,20 +24,25 @@
 
   app.get('/getname', function(request, response) {
     var name;
-    name = request.query.name;
-    all_names.push(name.toString());
+    name = capitalize(request.query.name);
+    if (all_names[name] == null) {
+      all_names[name] = 1;
+    } else {
+      all_names[name] += 1;
+    }
     return response.render('names', {
-      name: capitalize(name),
+      name: name,
       all_names: all_names
     });
   });
 
   app.get('/allnames', function(request, response) {
-    var title;
+    var name, title;
+    name = name;
     title = "All Names Ever";
     return response.render("names", {
-      'names': all_names,
-      'title': title
+      all_names: all_names,
+      name: name
     });
   });
 

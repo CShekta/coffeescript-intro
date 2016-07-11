@@ -24,7 +24,7 @@
 
   app.get('/getname', function(request, response) {
     var name;
-    name = capitalize(request.query.name);
+    name = capitalize(request.query.name.replace(/^\s+|\s+$/g, ""));
     if (all_names[name] == null) {
       all_names[name] = 1;
     } else {

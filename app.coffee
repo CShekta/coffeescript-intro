@@ -1,35 +1,47 @@
 express = require 'express'
 exphbs  = require 'express-handlebars'
 
+nameGame = require "./name_games"
+processNames = require "./process_names"
+
+
 app = express()
-all_names = {'world': 1}
 
 app.engine 'handlebars', exphbs defaultLayout: 'main'
+
 app.set 'view engine', "handlebars"
 
 app.get '/', (request, response) ->
   response.render 'home'
 
 app.get '/getname', (request, response) ->
-  name = capitalize request.query.name
-  if !all_names[name]?
-    all_names[name] = 1
-  else
-    all_names[name] += 1
+  input = nameGame.clean request.query.name
+
+  all_names = processNames.process input
+
   response.render 'names',
-    name: name
+    name: input
+    all_names: all_names
+
+app.get '/changename', (request, response) ->
+  input = nameGame.piggy request.query.name
+
+  all_names = processNames.process input
+
+  response.render 'names',
+    name: input
     all_names: all_names
 
 app.get '/allnames', (request, response) ->
+  if not name
+    name = "World"
+
   name = name
-  title = "All Names Ever"
+  console.log processNames.get_all_names
   response.render "names",
-    all_names: all_names
+    all_names: processNames.get_all_names
     name: name
 
 app.listen 8888
-
-capitalize = (word) ->
-  word = word[0].toUpperCase() + word[1..].toLowerCase()
 
 console.log 'Server running on localhost:8888'

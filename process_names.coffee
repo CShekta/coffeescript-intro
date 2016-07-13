@@ -1,5 +1,6 @@
-module.exports.get_all_names =
-  all_names = {'World': 1}
+all_names = {}
+module.exports.get_all_names = ->
+  all_names
 
 module.exports.process = (name) ->
   if not all_names[name]
